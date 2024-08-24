@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.techne.jenotes.presentation.common.LoginWithGoogleText
 import com.techne.jenotes.presentation.common.LogoText
-import com.techne.jenotes.presentation.common.RoundedButton
 import com.techne.jenotes.presentation.ui.theme.bgColor
 
 
