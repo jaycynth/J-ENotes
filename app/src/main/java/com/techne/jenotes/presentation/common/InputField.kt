@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.techne.jenotes.presentation.ui.theme.bgColor
 import com.techne.jenotes.presentation.ui.theme.fieldColor
+import com.techne.jenotes.presentation.ui.theme.plusJakartaSans
 
 @Composable
 fun InputField(
@@ -158,7 +159,7 @@ fun CustomOutlinedTextField(
             Text(
                 text = label,
                 color = Color.White,
-                style = TextStyle(fontSize = 13.sp, fontWeight = FontWeight.Bold)
+                style = TextStyle(fontSize = 13.sp, fontWeight = FontWeight.ExtraLight)
             )
         },        leadingIcon = leadingIcon,
         visualTransformation = visualTransformation,

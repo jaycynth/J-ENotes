@@ -1,16 +1,16 @@
 package com.techne.jenotes
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -31,13 +31,16 @@ class MainActivity : ComponentActivity() {
             JENotesTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     val navController = rememberNavController()
+                    val context = LocalContext.current
 
                     NavHost(navController = navController, startDestination = "splash") {
                         composable("splash") {
                             SplashScreen(navController = navController)
                         }
                         composable("login") {
-                            LoginScreen(navController = navController)
+                            LoginScreen(navController = navController){
+                                (context as? Activity)?.finish()
+                            }
                         }
                         composable("signup") {
                             SignUpScreen(navController = navController)
@@ -50,21 +53,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    JENotesTheme {
-        Greeting("Android")
     }
 }

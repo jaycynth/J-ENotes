@@ -1,5 +1,6 @@
 package com.techne.jenotes.presentation.login
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -46,7 +47,7 @@ import com.techne.jenotes.presentation.ui.theme.greyText
 import com.techne.jenotes.presentation.ui.theme.plusJakartaSans
 
 @Composable
-fun LoginScreen(navController: NavController, modifier: Modifier = Modifier) {
+fun LoginScreen(navController: NavController, modifier: Modifier = Modifier,onBackPress: () -> Unit) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var isPasswordVisible by remember { mutableStateOf(false) }
@@ -65,6 +66,9 @@ fun LoginScreen(navController: NavController, modifier: Modifier = Modifier) {
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            BackHandler {
+                onBackPress()
+            }
             LogoText()
             Spacer(modifier = Modifier.height(60.dp))
             FieldsContainer(
@@ -75,7 +79,7 @@ fun LoginScreen(navController: NavController, modifier: Modifier = Modifier) {
                 password = password,
                 onEmailChange = { email = it },
                 onPasswordChange = { password = it },
-                onLoginClick = { /* Handle login */ },
+                onLoginClick = { navController.navigate("home") },
                 onForgotPasswordClick = { /* Handle forgot password */ },
                 isPasswordVisible = isPasswordVisible,
                 onPasswordVisibilityToggle = { isPasswordVisible = !isPasswordVisible },
@@ -130,7 +134,9 @@ fun FieldsContainer(
         )
         Spacer(modifier = Modifier.height(30.dp))
         RoundedButton(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
             text = "Login",
             onClick = onLoginClick
         )

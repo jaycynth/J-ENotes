@@ -28,6 +28,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.techne.jenotes.R
@@ -36,7 +37,7 @@ import com.techne.jenotes.presentation.ui.theme.greyText
 import com.techne.jenotes.presentation.ui.theme.plusJakartaSans
 
 @Composable
-fun GradientText(text: String) {
+fun GradientText(text: String, fontSize: TextUnit) {
     val gradientBrush = Brush.linearGradient(
         colors = listOf(Color(0xFFFF5D75), Color(0xFFFFAE5E)),
     )
@@ -44,7 +45,7 @@ fun GradientText(text: String) {
         text = text,
         style = TextStyle(
             brush = gradientBrush,
-            fontSize = 40.sp,
+            fontSize = fontSize,
             fontWeight = FontWeight.Bold,
             fontFamily = plusJakartaSans
         ),
@@ -52,30 +53,33 @@ fun GradientText(text: String) {
 }
 
 @Composable
-fun LogoText(modifier: Modifier = Modifier) {
+fun LogoText(modifier: Modifier = Modifier, fontSize: TextUnit = 40.sp) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Row(
             modifier = modifier.padding(0.dp, 10.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            GradientText(text = "J&E")
+            GradientText(text = "J&E", fontSize = fontSize)
             Spacer(Modifier.width(8.dp))
             Text(
-                text = "Notes.", style = TextStyle(
+                text = "Notes.",
+                style = TextStyle(
                     fontFamily = plusJakartaSans,
-                    fontSize = 40.sp,
+                    fontSize = fontSize,
                     fontWeight = FontWeight.Bold,
                     color = Color.White,
                 )
             )
         }
         Text(
-            text = "Capture. Quiz. Remember.", style = TextStyle(
+            text = "Capture. Quiz. Remember.",
+            style = TextStyle(
                 fontFamily = plusJakartaSans,
                 fontWeight = FontWeight(200),
                 fontSize = 16.sp,
                 color = Color.White,
-            ), textAlign = TextAlign.Center
+            ),
+            textAlign = TextAlign.Center
         )
     }
 }

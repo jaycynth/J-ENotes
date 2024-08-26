@@ -74,7 +74,7 @@ fun SignUpScreen(navController: NavController, modifier: Modifier = Modifier) {
                     .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                LogoText()
+                LogoText(fontSize = 30.sp)
                 Spacer(modifier = Modifier.height(30.dp))
                 HeaderText(
                     title = "Register",
