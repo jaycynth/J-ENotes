@@ -93,4 +93,15 @@ dependencies {
     implementation(libs.androidx.constraintlayout.compose)
 
 
+
+    implementation("com.mohamedrejeb.richeditor:richeditor-compose:1.0.0-rc06")
+
+
+
+    val moshi_version="1.14.0"
+    implementation("com.squareup.moshi:moshi-kotlin:$moshi_version")
+    implementation("com.squareup.moshi:moshi:$moshi_version")
+    implementation("com.squareup.moshi:moshi-adapters:$moshi_version")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshi_version")
+
 }

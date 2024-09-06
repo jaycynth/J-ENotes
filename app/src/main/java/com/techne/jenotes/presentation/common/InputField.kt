@@ -4,11 +4,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -27,8 +27,8 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.techne.jenotes.presentation.ui.theme.bgColor
+import com.techne.jenotes.presentation.ui.theme.blackColor
 import com.techne.jenotes.presentation.ui.theme.fieldColor
-import com.techne.jenotes.presentation.ui.theme.plusJakartaSans
 
 @Composable
 fun InputField(
@@ -36,15 +36,18 @@ fun InputField(
     onValueChange: (String) -> Unit,
     label: String,
     leadingIcon: ImageVector?,
-    keyboardType: KeyboardType,
     visualTransformation: VisualTransformation = VisualTransformation.None,
-) {
+    modifier: Modifier,
+    keyboardOptions: KeyboardOptions,
+    keyboardActions: KeyboardActions
+
+    ) {
 
     TextField(
         value = value,
         onValueChange = onValueChange,
-        textStyle = TextStyle(color = bgColor, fontWeight = FontWeight.Bold),
-        modifier = Modifier
+        textStyle = TextStyle(color = blackColor, fontWeight = FontWeight.Normal),
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp),
         shape = RoundedCornerShape(8.dp),
@@ -64,7 +67,8 @@ fun InputField(
                 style = TextStyle(fontSize = 13.sp, fontWeight = FontWeight.Bold)
             )
         },
-        keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
         visualTransformation = visualTransformation,
         colors = TextFieldDefaults.colors(
             focusedContainerColor = fieldColor,
@@ -86,14 +90,17 @@ fun PasswordInputField(
     isPasswordVisible: Boolean,
     leadingIcon: ImageVector?,
     onPasswordVisibilityToggle: () -> Unit,
+    modifier: Modifier,
+    keyboardOptions: KeyboardOptions,
+    keyboardActions: KeyboardActions
 ) {
     TextField(
         value = value,
         onValueChange = onValueChange,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp),
-        textStyle = TextStyle(color = bgColor, fontWeight = FontWeight.Bold),
+        textStyle = TextStyle(color = blackColor, fontWeight = FontWeight.Normal),
         label = {
             Text(
                 text = label,
@@ -102,7 +109,6 @@ fun PasswordInputField(
             )
         },
         shape = RoundedCornerShape(8.dp),
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
         leadingIcon = if (leadingIcon != null) {
             {
@@ -133,25 +139,30 @@ fun PasswordInputField(
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent,
-        )
+        ),
+        keyboardActions = keyboardActions,
+        keyboardOptions = keyboardOptions
     )
 }
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CustomOutlinedTextField(
     value: String,
     onValueChange: (String) -> Unit,
     label: String,
     leadingIcon: @Composable (() -> Unit)? = null,
-    visualTransformation: VisualTransformation = VisualTransformation.None
-) {
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    modifier: Modifier,
+    keyboardOptions: KeyboardOptions,
+    keyboardActions: KeyboardActions
+
+    ) {
 
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp),
         shape = RoundedCornerShape(8.dp),
@@ -173,6 +184,8 @@ fun CustomOutlinedTextField(
             disabledIndicatorColor = Color.White,
             focusedLabelColor = Color.White,
             unfocusedLabelColor = Color.White,
-        )
+        ),
+        keyboardActions = keyboardActions,
+        keyboardOptions = keyboardOptions
     )
 }
